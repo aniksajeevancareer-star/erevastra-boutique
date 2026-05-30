@@ -1,0 +1,103 @@
+{
+  "categories": [
+    {
+      "key": "croptops",
+      "name": "Crop Tops",
+      "subtitle": "Contemporary Chic",
+      "desc": "Bold prints, soft fabrics, and silhouettes that celebrate the modern woman's confidence.",
+      "icon": "👚",
+      "tag": "Trending",
+      "count": 1,
+      "images": [
+        {
+          "id": "croptops-1",
+          "filename": "Embroidered Crop Top_1299.png",
+          "imagePath": "collections/croptops/Embroidered Crop Top_1299.png",
+          "name": "Embroidered Crop Top",
+          "price": 1299,
+          "originalPrice": null,
+          "rating": 5,
+          "reviews": 31,
+          "wishlist": false
+        }
+      ]
+    },
+    {
+      "key": "innerwear",
+      "name": "Innerwear",
+      "subtitle": "Premium Basics",
+      "desc": "Crafted for comfort and confidence — premium innerwear in breathable, skin-friendly fabrics.",
+      "icon": "✨",
+      "tag": "Essentials",
+      "count": 1,
+      "images": [
+        {
+          "id": "innerwear-1",
+          "filename": "Lace Bralette Combo_1199.png",
+          "imagePath": "collections/innerwear/Lace Bralette Combo_1199.png",
+          "name": "Lace Bralette Combo",
+          "price": 1199,
+          "originalPrice": null,
+          "rating": 5,
+          "reviews": 16,
+          "wishlist": false
+        }
+      ]
+    },
+    {
+      "key": "nightwear",
+      "name": "Night Wear",
+      "subtitle": "Dreamy Comfort",
+      "desc": "Luxuriously soft sets that wrap you in comfort — because your nights deserve elegance too.",
+      "icon": "🌙",
+      "tag": "New In",
+      "count": 1,
+      "images": [
+        {
+          "id": "nightwear-1",
+          "filename": "Satin Pajama Set_1899.png",
+          "imagePath": "collections/nightwear/Satin Pajama Set_1899.png",
+          "name": "Satin Pajama Set",
+          "price": 1899,
+          "originalPrice": null,
+          "rating": 5,
+          "reviews": 50,
+          "wishlist": false
+        }
+      ]
+    },
+    {
+      "key": "saree",
+      "name": "Saree Collection",
+      "subtitle": "Timeless Drapes",
+      "desc": "From Kanjivaram silks to lightweight georgettes — every saree tells a story of heritage and grace.",
+      "icon": "🥻",
+      "tag": "Bestseller",
+      "count": 2,
+      "images": [
+        {
+          "id": "saree-1",
+          "filename": "Banarasi Silk Saree_6999.png",
+          "imagePath": "collections/saree/Banarasi Silk Saree_6999.png",
+          "name": "Banarasi Silk Saree",
+          "price": 6999,
+          "originalPrice": null,
+          "rating": 5,
+          "reviews": 36,
+          "wishlist": false
+        },
+        {
+          "id": "saree-2",
+          "filename": "Kanjivaram Silk Saree_5499.jpg",
+          "imagePath": "collections/saree/Kanjivaram Silk Saree_5499.jpg",
+          "name": "Kanjivaram Silk Saree",
+          "price": 5499,
+          "originalPrice": null,
+          "rating": 5,
+          "reviews": 40,
+          "wishlist": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+<section class="shop" id="shop">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Latest Arrivals</span>
+      <h2 class="section-title">Shop the <em>Collection</em></h2>
+    </div>
+
+    <div class="filter-bar">
+      <button
+        *ngFor="let f of filters"
+        class="filter-btn"
+        [class.active]="activeFilter === f"
+        (click)="setFilter(f)"
+      >{{ f }}</button>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let product of filteredProducts">
+        <div class="product-image">
+          <img [src]="product.image" [alt]="product.name" class="real-image">
+          
+          <button class="wishlist-btn" (click)="toggleWishlist(product)" [class.active]="product.wishlist">
+            {{ product.wishlist ? '♥' : '♡' }}
+          </button>
+          
+          <div class="quick-add">
+            <button class="btn-primary" (click)="openEnquiryModal(product)">Enquire Now</button>
+          </div>
+        </div>
+        <div class="product-info" (click)="openEnquiryModal(product)">
+          <span class="product-category">{{ product.category }}</span>
+          <h4 class="product-name">{{ product.name }}</h4>
+          <div class="product-rating">
+            <span *ngFor="let s of getStars(product.rating)" class="star" [class.filled]="s">★</span>
+            <span class="review-count">({{ product.reviews }})</span>
+          </div>
+          <div class="product-price">
+            <span class="current-price">{{ formatPrice(product.price) }}</span>
+            <span class="original-price" *ngIf="product.originalPrice">{{ formatPrice(product.originalPrice) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="load-more" *ngIf="filteredProducts.length === 0">
+      <p class="no-products">No styles added in this collection yet. Check back soon!</p>
+    </div>
+  </div>
+
+  <!-- Premium Split-Screen Enquiry Modal -->
+  <div class="enquiry-modal-overlay" *ngIf="isEnquiryModalOpen" (click)="closeEnquiryModal()">
+    <div class="enquiry-modal-container" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeEnquiryModal()">&times;</button>
+      
+      <div class="enquiry-modal-grid" *ngIf="selectedProduct">
+        <!-- Left Side: Product Preview -->
+        <div class="modal-product-pane">
+          <div class="modal-image-wrapper">
+            <img [src]="selectedProduct.image" [alt]="selectedProduct.name">
+          </div>
+          <div class="modal-product-details">
+            <span class="modal-category">{{ selectedProduct.category }}</span>
+            <h3>{{ selectedProduct.name }}</h3>
+            <p class="modal-price">{{ formatPrice(selectedProduct.price) }}</p>
+          </div>
+        </div>
+        
+        <!-- Right Side: Enquiry Form -->
+        <div class="modal-form-pane">
+          <!-- Success State -->
+          <div class="form-success-wrapper" *ngIf="enquirySubmitted">
+            <div class="success-icon">✦</div>
+            <h4>Redirecting to WhatsApp...</h4>
+            <p>We are opening WhatsApp Web or App to send your details directly to our boutique.</p>
+          </div>
+
+          <!-- Form State -->
+          <form class="enquiry-form" (ngSubmit)="submitEnquiry()" *ngIf="!enquirySubmitted">
+            <h3>Product Enquiry</h3>
+            <p class="form-subtitle">Enquire below to check customization options, availability, and delivery.</p>
+            
+            <div class="form-group">
+              <label>Your Name *</label>
+              <input type="text" [(ngModel)]="enquiryForm.name" name="name" placeholder="Priya Sharma" required>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>WhatsApp Number *</label>
+                <input type="tel" [(ngModel)]="enquiryForm.phone" name="phone" placeholder="+91 99999 00000" required>
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" [(ngModel)]="enquiryForm.email" name="email" placeholder="priya@example.com">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Questions / Specifications</label>
+              <textarea [(ngModel)]="enquiryForm.message" name="message" rows="3" placeholder="E.g., What sizes are available? Can this drape style be customized?"></textarea>
+            </div>
+            
+            <div class="modal-actions">
+              <button type="submit" class="btn-primary submit-btn">
+                Send Enquiry
+              </button>
+              <a [href]="getWhatsAppLink(selectedProduct)" target="_blank" class="btn-outline direct-wa-btn" (click)="closeEnquiryModal()">
+                Quick WhatsApp Chat
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+<nav class="navbar" [class.scrolled]="scrolled">
+  <div class="nav-container">
+    <a href="#" class="brand">
+      <span class="brand-icon">✦</span>
+      <div class="brand-text">
+        <span class="brand-name">Elegance</span>
+        <span class="brand-tagline">Boutique</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" [class.open]="menuOpen">
+      <li *ngFor="let link of navLinks">
+        <a [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
+      </li>
+      <li><a href="#" class="nav-cta" (click)="closeMenu()">Shop Now</a></li>
+    </ul>
+
+    <button class="hamburger" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>

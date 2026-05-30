@@ -1,0 +1,213 @@
+.collections {
+  background: var(--deep);
+  color: var(--cream);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+
+  .section-label { display: block; margin-bottom: 0.8rem; }
+
+  .section-title {
+    color: var(--cream);
+    em { font-style: italic; color: var(--gold); }
+  }
+
+  .section-sub {
+    margin-top: 1rem;
+    color: rgba(250,246,241,0.5);
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.collection-card {
+  position: relative;
+  padding: 2rem 1.8rem;
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: fadeUp 0.7s ease both;
+
+  &:hover {
+    transform: translateY(-6px);
+
+    .col-link svg { transform: translateX(4px); }
+    .card-decoration { transform: scale(1.1) rotate(15deg); }
+  }
+}
+
+.card-saree {
+  background: linear-gradient(145deg, #7A2E3C 0%, #2C1A1D 100%);
+  border: 1px solid rgba(201, 169, 110, 0.2);
+}
+
+.card-crop {
+  background: linear-gradient(145deg, #C4736A 0%, #7A2E3C 100%);
+  border: 1px solid rgba(201, 169, 110, 0.2);
+}
+
+.card-night {
+  background: linear-gradient(145deg, #1a0f11 0%, #4a1e28 100%);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+}
+
+.card-inner {
+  background: linear-gradient(145deg, #3d1e25 0%, #1a0f11 100%);
+  border: 1px solid rgba(232, 196, 184, 0.2);
+}
+
+.card-with-image {
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  
+  &:hover {
+    .card-bg-image {
+      transform: scale(1.08);
+    }
+  }
+}
+
+.card-bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(44, 26, 29, 0.95) 20%, rgba(44, 26, 29, 0.55) 100%);
+  z-index: 1;
+}
+
+.card-content-wrapper {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.col-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 3px 8px;
+}
+
+.col-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.card-body {
+  margin-bottom: 1.8rem;
+}
+
+.col-subtitle {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250,246,241,0.45);
+  margin-bottom: 0.4rem;
+}
+
+.col-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 0.8rem;
+}
+
+.col-desc {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: rgba(250,246,241,0.55);
+  font-weight: 300;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.col-count {
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+.col-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  transition: gap 0.3s ease;
+
+  svg {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  &:hover { gap: 10px; }
+}
+
+.card-decoration {
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 110, 0.1);
+  transition: transform 0.4s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 15px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 169, 110, 0.07);
+  }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .collections-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 540px) {
+  .collections-grid { grid-template-columns: 1fr; }
+}
