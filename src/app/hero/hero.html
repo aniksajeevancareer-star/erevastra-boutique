@@ -36,29 +36,32 @@
           <div class="img-overlay">
             <span class="img-tag">Featured</span>
           </div>
-          <div class="fashion-illustration saree"></div>
+          <img *ngIf="sareeCard.image" [src]="sareeCard.image" [alt]="sareeCard.name" class="fashion-illustration">
+          <div *ngIf="!sareeCard.image" class="fashion-illustration saree"></div>
         </div>
         <div class="card-info">
-          <span>Banarasi Silk Saree</span>
-          <strong>₹4,299</strong>
+          <span>{{ sareeCard.name }}</span>
+          <strong>{{ formatPrice(sareeCard.price) }}</strong>
         </div>
       </div>
       <div class="visual-card side-card top-card">
         <div class="card-image">
-          <div class="fashion-illustration crop"></div>
+          <img *ngIf="cropCard.image" [src]="cropCard.image" [alt]="cropCard.name" class="fashion-illustration">
+          <div *ngIf="!cropCard.image" class="fashion-illustration crop"></div>
         </div>
         <div class="card-info">
-          <span>Crop Top</span>
-          <strong>₹899</strong>
+          <span>{{ cropCard.name }}</span>
+          <strong>{{ formatPrice(cropCard.price) }}</strong>
         </div>
       </div>
       <div class="visual-card side-card bottom-card">
         <div class="card-image">
-          <div class="fashion-illustration night"></div>
+          <img *ngIf="nightCard.image" [src]="nightCard.image" [alt]="nightCard.name" class="fashion-illustration">
+          <div *ngIf="!nightCard.image" class="fashion-illustration night"></div>
         </div>
         <div class="card-info">
-          <span>Night Wear Set</span>
-          <strong>₹1,299</strong>
+          <span>{{ nightCard.name }}</span>
+          <strong>{{ formatPrice(nightCard.price) }}</strong>
         </div>
       </div>
       <div class="floating-badge badge1">

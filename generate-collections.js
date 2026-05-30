@@ -36,14 +36,68 @@ const categoryMeta = {
   }
 };
 
+function parseFileName(file) {
+  const baseName = path.basename(file, path.extname(file));
+  const parts = baseName.split('_');
+  
+  let name = '';
+  let price = null;
+  let originalPrice = null;
+
+  const isNum = (str) => str && !isNaN(str) && !isNaN(parseFloat(str));
+
+  if (parts.length === 1) {
+    name = parts[0].replace(/[-_]/g, ' ').trim();
+  } else {
+    const lastPart = parts[parts.length - 1];
+    const secondLastPart = parts[parts.length - 2];
+
+    if (isNum(lastPart)) {
+      if (secondLastPart && isNum(secondLastPart)) {
+        originalPrice = parseFloat(lastPart);
+        price = parseFloat(secondLastPart);
+        name = parts.slice(0, parts.length - 2).join(' ').replace(/[-_]/g, ' ').trim();
+      } else {
+        price = parseFloat(lastPart);
+        name = parts.slice(0, parts.length - 1).join(' ').replace(/[-_]/g, ' ').trim();
+      }
+    } else {
+      name = baseName.replace(/[-_]/g, ' ').trim();
+    }
+  }
+
+  // Capitalize first letter of each word
+  name = name.split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
+  return { name, price, originalPrice };
+}
+
 try {
   if (!fs.existsSync(collectionsDir)) {
     fs.mkdirSync(collectionsDir, { recursive: true });
     console.log('Created collections directory.');
   }
 
+  // Ensure hero folder exists
+  const heroDir = path.join(collectionsDir, 'hero');
+  if (!fs.existsSync(heroDir)) {
+    fs.mkdirSync(heroDir, { recursive: true });
+    console.log('Created hero directory.');
+  }
+
+  // Filter out the 'hero' folder from normal categories
   const dirs = fs.readdirSync(collectionsDir).filter(f => {
-    return fs.statSync(path.join(collectionsDir, f)).isDirectory();
+    return fs.statSync(path.join(collectionsDir, f)).isDirectory() && f.toLowerCase() !== 'hero';
+  });
+
+  const order = Object.keys(categoryMeta);
+  dirs.sort((a, b) => {
+    const indexA = order.indexOf(a.toLowerCase());
+    const indexB = order.indexOf(b.toLowerCase());
+    if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
   });
 
   const categories = [];
@@ -64,28 +118,7 @@ try {
     };
 
     const images = files.map((file, idx) => {
-      // Expecting formats: "Product Name_Price.jpg" or "Product Name_Price_OriginalPrice.jpg" or just "saree1.jpg"
-      const baseName = path.basename(file, path.extname(file));
-      const parts = baseName.split('_');
-      
-      let name = parts[0].replace(/[-_]/g, ' ').trim();
-      // Capitalize first letter of each word
-      name = name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-
-      let price = null;
-      let originalPrice = null;
-
-      if (parts[1]) {
-        price = parseFloat(parts[1]);
-      }
-      if (parts[2]) {
-        originalPrice = parseFloat(parts[2]);
-      }
-
-      // If price parsing fails, just leave it as null
-      if (isNaN(price)) price = null;
-      if (isNaN(originalPrice)) originalPrice = null;
-
+      const { name, price, originalPrice } = parseFileName(file);
       return {
         id: `${dirKey}-${idx + 1}`,
         filename: file,
@@ -111,8 +144,38 @@ try {
     });
   });
 
-  fs.writeFileSync(outputFile, JSON.stringify({ categories }, null, 2));
-  console.log('Successfully generated collections-metadata.json with', categories.length, 'categories.');
+  // Process hero directory separately
+  let heroData = null;
+  if (fs.existsSync(heroDir)) {
+    const files = fs.readdirSync(heroDir).filter(file => {
+      const ext = path.extname(file).toLowerCase();
+      return ['.jpg', '.jpeg', '.png', '.webp', '.svg'].includes(ext);
+    });
+
+    const images = files.map((file, idx) => {
+      const { name, price, originalPrice } = parseFileName(file);
+      return {
+        id: `hero-${idx + 1}`,
+        filename: file,
+        imagePath: `collections/hero/${file}`,
+        name: name,
+        price: price,
+        originalPrice: originalPrice,
+        rating: 5,
+        reviews: 0,
+        wishlist: false
+      };
+    });
+
+    heroData = {
+      key: 'hero',
+      count: images.length,
+      images: images
+    };
+  }
+
+  fs.writeFileSync(outputFile, JSON.stringify({ categories, hero: heroData }, null, 2));
+  console.log('Successfully generated collections-metadata.json with', categories.length, 'categories and hero images.');
 } catch (err) {
   console.error('Error generating metadata:', err);
 }
