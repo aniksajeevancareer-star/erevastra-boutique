@@ -33,7 +33,7 @@ export class ProductGridComponent implements OnInit {
   enquirySubmitted = false;
 
   // Boutique WhatsApp number (configured)
-  boutiqueWhatsApp = '918921379589'; 
+  boutiqueWhatsApp = '917760068642'; 
 
   ngOnInit() {
     fetch('collections-metadata.json')
