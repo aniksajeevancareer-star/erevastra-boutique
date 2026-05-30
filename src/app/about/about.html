@@ -1,0 +1,52 @@
+<section class="about" id="about">
+  <div class="about-bg"></div>
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="visual-block main-block">
+          <div class="block-inner">
+            <span class="block-icon">🥻</span>
+            <span class="block-text">Est. 2015</span>
+          </div>
+        </div>
+        <div class="visual-block side-block">
+          <div class="block-inner">
+            <span class="block-icon">✦</span>
+            <span class="block-text">Premium Quality</span>
+          </div>
+        </div>
+        <div class="about-stat-card">
+          <div class="stat-row">
+            <div class="astat"><span class="n">12K+</span><span class="l">Happy Clients</span></div>
+            <div class="astat"><span class="n">500+</span><span class="l">Styles</span></div>
+          </div>
+          <div class="stat-row">
+            <div class="astat"><span class="n">10+</span><span class="l">Years of Trust</span></div>
+            <div class="astat"><span class="n">4.9★</span><span class="l">Avg. Rating</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-text">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title">Dressing Women<br><em>With Love & Care</em></h2>
+        <p class="about-lead">
+          Born in the heart of a family's love for fashion, Elegance Boutique was founded with one vision — to make every woman feel beautiful, inside and out.
+        </p>
+        <p class="about-body">
+          From timeless heritage sarees to contemporary crop tops, from cozy nightwear to premium daily innerwear — we curate fashion that fits your story. Each piece is hand-selected for quality, comfort, and style. We believe fashion is personal, and we celebrate every version of womanhood.
+        </p>
+        <div class="about-pillars">
+          <div class="pillar" *ngFor="let p of pillars">
+            <span class="pillar-icon">{{ p.icon }}</span>
+            <div>
+              <strong>{{ p.title }}</strong>
+              <p>{{ p.desc }}</p>
+            </div>
+          </div>
+        </div>
+        <a href="#shop" class="btn-primary">Explore Our Story</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+<section class="collections" id="collections">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our World</span>
+      <h2 class="section-title">Curated <em>Collections</em></h2>
+      <p class="section-sub">Four worlds of fashion — each thoughtfully curated for you.</p>
+    </div>
+
+    <div class="collections-grid">
+      <div
+        class="collection-card"
+        *ngFor="let col of collections; let i = index"
+        [class.has-image]="col.previewImage"
+        [class]="col.previewImage ? 'card-with-image' : 'card-' + col.gradient"
+        [style.animation-delay]="(i * 0.1) + 's'"
+      >
+        <div class="card-bg-image" *ngIf="col.previewImage" [style.background-image]="'url(' + col.previewImage + ')'"></div>
+        <div class="card-overlay" *ngIf="col.previewImage"></div>
+        
+        <div class="card-content-wrapper">
+          <div class="card-top">
+            <span class="col-tag">{{ col.tag }}</span>
+            <div class="col-icon" *ngIf="!col.previewImage">{{ col.icon }}</div>
+          </div>
+          <div class="card-body">
+            <span class="col-subtitle">{{ col.subtitle }}</span>
+            <h3 class="col-name">{{ col.name }}</h3>
+            <p class="col-desc">{{ col.desc }}</p>
+          </div>
+          <div class="card-footer">
+            <span class="col-count">{{ col.countText }}</span>
+            <a href="#shop" class="col-link">
+              Explore
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <div class="card-decoration" *ngIf="!col.previewImage"></div>
+      </div>
+    </div>
+  </div>
+</section>
