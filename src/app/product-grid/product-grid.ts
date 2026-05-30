@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -35,6 +35,8 @@ export class ProductGridComponent implements OnInit {
   // Boutique WhatsApp number (configured)
   boutiqueWhatsApp = '917760068642'; 
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit() {
     fetch('collections-metadata.json')
       .then(res => {
@@ -67,12 +69,14 @@ export class ProductGridComponent implements OnInit {
 
         this.filters = loadedFilters;
         this.allProducts = productsList;
+        this.cdr.detectChanges();
       })
       .catch(err => {
         console.error('Error loading collections metadata:', err);
         // Clean fallback
         this.filters = ['All', 'Sarees', 'Crop Tops', 'Night Wear', 'Innerwear'];
         this.allProducts = [];
+        this.cdr.detectChanges();
       });
   }
 

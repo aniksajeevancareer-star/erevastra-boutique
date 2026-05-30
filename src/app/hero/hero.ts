@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface HeroCard {
@@ -32,6 +32,8 @@ export class HeroComponent implements OnInit {
     price: 1899,
     image: null
   };
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     console.log('HeroComponent: ngOnInit started');
@@ -125,9 +127,10 @@ export class HeroComponent implements OnInit {
               image: nightImg.imagePath
             };
           }
-        } else {
-          console.log('HeroComponent: no custom hero images found, using category defaults');
         }
+
+        // Force change detection so images show up immediately
+        this.cdr.detectChanges();
       })
       .catch(err => {
         console.error('HeroComponent: Error loading collections metadata for hero:', err);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class FeaturedCollectionsComponent implements OnInit {
   collections: any[] = [];
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     fetch('collections-metadata.json')
@@ -23,6 +25,7 @@ export class FeaturedCollectionsComponent implements OnInit {
           countText: cat.count === 1 ? '1 Style' : `${cat.count} Styles`,
           previewImage: cat.images && cat.images.length > 0 ? cat.images[0].imagePath : null
         }));
+        this.cdr.detectChanges();
       })
       .catch(err => {
         console.error('Error loading collections metadata:', err);
@@ -65,6 +68,7 @@ export class FeaturedCollectionsComponent implements OnInit {
             tag: 'Essentials'
           }
         ];
+        this.cdr.detectChanges();
       });
   }
 }
