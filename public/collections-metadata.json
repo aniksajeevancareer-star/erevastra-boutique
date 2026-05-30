@@ -17,7 +17,7 @@
           "price": 6999,
           "originalPrice": null,
           "rating": 5,
-          "reviews": 45,
+          "reviews": 29,
           "wishlist": false
         },
         {
@@ -28,7 +28,7 @@
           "price": 1500,
           "originalPrice": null,
           "rating": 5,
-          "reviews": 22,
+          "reviews": 34,
           "wishlist": false
         }
       ]
@@ -50,7 +50,7 @@
           "price": 1299,
           "originalPrice": null,
           "rating": 5,
-          "reviews": 38,
+          "reviews": 51,
           "wishlist": false
         }
       ]
@@ -72,7 +72,7 @@
           "price": 1899,
           "originalPrice": null,
           "rating": 5,
-          "reviews": 16,
+          "reviews": 26,
           "wishlist": false
         }
       ]
@@ -94,7 +94,7 @@
           "price": 1199,
           "originalPrice": null,
           "rating": 5,
-          "reviews": 17,
+          "reviews": 15,
           "wishlist": false
         }
       ]
